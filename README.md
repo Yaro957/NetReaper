@@ -3,8 +3,6 @@
 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.6%2B-blue.svg?style=flat-square)
-![License](https://img.shields.io/badge/License-MIT-purple.svg?style=flat-square)
-
 ---
 
 ## 🔥 What is NetPepep?
@@ -98,13 +96,6 @@ python netpepep.py
 > This tool is for **educational purposes only**.  
 > Use it only on systems you **own** or have **explicit permission** to scan.  
 > Unauthorized port scanning may be illegal.
-
----
-
-## 📜 License
-
-This project is licensed under the [MIT License](LICENSE).  
-Do what you want, but don’t blame Lucifer if you get caught.
 
 ---
 
