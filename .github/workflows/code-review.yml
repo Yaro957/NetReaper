@@ -48,8 +48,11 @@ jobs:
               commit_sha: $sha,
               changed_files: $files
             }')
-          
-          echo "PAYLOAD_BODY=$PAYLOAD_BODY" >> $GITHUB_OUTPUT
+
+          # Escape for GitHub output
+          ESCAPED=$(echo "$PAYLOAD_BODY" | jq -Rs .)
+
+          echo "payload=$ESCAPED" >> $GITHUB_OUTPUT
 
       - name: Send Review Request to Node.js Backend
         run: |
@@ -57,6 +60,6 @@ jobs:
 
           echo "Sending request to: $SERVER_URL"
 
-          curl -X POST $SERVER_URL \
+          curl -X POST "$SERVER_URL" \
                -H 'Content-Type: application/json' \
-               --data '${{ steps.prepare_payload.outputs.PAYLOAD_BODY }}'
+               --data "${{ steps.prepare_payload.outputs.payload }}"
