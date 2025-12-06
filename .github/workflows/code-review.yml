@@ -30,13 +30,13 @@ jobs:
         id: prepare_payload
         run: |
           CHANGED_FILES_STRING="${{ steps.changed-files.outputs.all_changed_files }}"
-          
+
           if [ -z "$CHANGED_FILES_STRING" ]; then
             CHANGED_FILES_JSON="[]"
           else
             CHANGED_FILES_JSON=$(echo "$CHANGED_FILES_STRING" | jq -R . | jq -s . | jq 'map({filename: .})')
           fi
-          
+
           PAYLOAD_BODY=$(jq -n \
             --arg repo "${{ github.repository }}" \
             --arg pr "${{ github.event.pull_request.number }}" \
@@ -48,8 +48,10 @@ jobs:
               commit_sha: $sha,
               changed_files: $files
             }')
-          
-          echo "PAYLOAD_BODY=$PAYLOAD_BODY" >> $GITHUB_OUTPUT
+
+          # Escape for GitHub output
+          ESCAPED=$(echo "$PAYLOAD_BODY" | jq -Rs .)
+          echo "payload=$ESCAPED" >> $GITHUB_OUTPUT
 
       - name: Send Review Request to Node.js Backend
         run: |
@@ -57,6 +59,9 @@ jobs:
 
           echo "Sending request to: $SERVER_URL"
 
-          curl -X POST $SERVER_URL \
-               -H 'Content-Type: application/json' \
-               --data '${{ steps.prepare_payload.outputs.PAYLOAD_BODY }}'
+          # UNESCAPE JSON before sending to backend
+          CLEAN_JSON=$(echo '${{ steps.prepare_payload.outputs.payload }}' | jq -r .)
+
+          curl -X POST "$SERVER_URL" \
+               -H "Content-Type: application/json" \
+               --data "$CLEAN_JSON"
