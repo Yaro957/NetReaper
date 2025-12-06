@@ -1,0 +1,62 @@
+# .github/workflows/code-review.yml
+name: AI Code Review Trigger
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  trigger_ai_review:
+    runs-on: ubuntu-latest
+
+    if: github.actor != 'dependabot[bot]'
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get All Changed Files in PR
+        id: changed-files
+        uses: tj-actions/changed-files@v44
+        with:
+          files_ignore: |
+            **.md
+            .github/**
+            package-lock.json
+
+      - name: Prepare JSON Payload for Backend
+        id: prepare_payload
+        run: |
+          CHANGED_FILES_STRING="${{ steps.changed-files.outputs.all_changed_files }}"
+          
+          if [ -z "$CHANGED_FILES_STRING" ]; then
+            CHANGED_FILES_JSON="[]"
+          else
+            CHANGED_FILES_JSON=$(echo "$CHANGED_FILES_STRING" | jq -R . | jq -s . | jq 'map({filename: .})')
+          fi
+          
+          PAYLOAD_BODY=$(jq -n \
+            --arg repo "${{ github.repository }}" \
+            --arg pr "${{ github.event.pull_request.number }}" \
+            --arg sha "${{ github.event.pull_request.head.sha }}" \
+            --argjson files "$CHANGED_FILES_JSON" \
+            '{
+              repository: $repo,
+              pull_request_number: ($pr | tonumber),
+              commit_sha: $sha,
+              changed_files: $files
+            }')
+          
+          echo "PAYLOAD_BODY=$PAYLOAD_BODY" >> $GITHUB_OUTPUT
+
+      - name: Send Review Request to Node.js Backend
+        run: |
+          SERVER_URL="https://pr-guardian.onrender.com/webhook"
+
+          echo "Sending request to: $SERVER_URL"
+
+          curl -X POST $SERVER_URL \
+               -H 'Content-Type: application/json' \
+               --data '${{ steps.prepare_payload.outputs.PAYLOAD_BODY }}'

@@ -1,48 +1,61 @@
+Got you!
+Let’s refactor the README **using the correct project name: *NetReaper***, while keeping the style clean, fun, and professional.
 
-# 🐸 NetPepep - Lucifer’s Chaotic Port Scanner
+Here is the **fully rewritten README for NetReaper** 👇
+
+---
+
+# ⚔️ **NetReaper — Lucifer’s Chaotic Port Scanner**
 
 ![Status](https://img.shields.io/badge/Status-Active-brightgreen?style=flat-square)
 ![Python](https://img.shields.io/badge/Python-3.6%2B-blue.svg?style=flat-square)
----
 
-## 🔥 What is NetPepep?
-
-**NetPepep** is a simple yet *chaotic* terminal-based **port scanner** written in Python.  
-It was forged in the flames of madness by Lucifer himself (😈).  
-
-Built for fun, quick scans, and learning basic network socket programming.
+**NetReaper** is a fast, colorful, and delightfully chaotic **terminal-based port scanner** written in Python.
+Forged in the underworld by Lucifer himself 😈, it’s perfect for quick scans, learning sockets, and causing *controlled mayhem*.
 
 ---
 
-## 🧠 Features
+## 🔥 **What is NetReaper?**
 
-- 🎯 Scan a single IP or multiple IPs (comma-separated)
-- ⚡ Specify number of ports (scans from 1 to N)
-- 🟢 Displays open ports
-- 🔴 Optionally shows closed ports too
-- 💀 Ctrl+C safe (clean exit with message)
-- 🌈 Colored output using `termcolor`
-- 🐸 Chaotic ASCII banner with attitude
+NetReaper is a lightweight port scanning tool designed for:
+
+* Instant network reconnaissance
+* Learning the basics of socket programming
+* Running fun, chaotic scans with badass ASCII art
+* Simple cybersecurity demonstrations
+
+It supports **single or multiple IPs**, customizable port ranges, colored output, and graceful shutdown.
 
 ---
 
-## 🖥️ Preview
+## ✨ **Features**
+
+* 🎯 Scan a **single IP** or **multiple IPs** (comma-separated)
+* ⚡ Choose how many ports to scan (1 → N)
+* 🟢 Displays **open** ports
+* 🔴 Optionally displays **closed** ports
+* 🛑 Safe `Ctrl + C` exit
+* 🌈 Color output via `termcolor`
+* ⚔️ ASCII banner worthy of Lucifer’s forge
+
+---
+
+## 🖥️ **Preview**
 
 ```
-    _   __     __  ____                              
-   / | / /__  / /_/ __ \___  ____ _____  ___  _____  
-  /  |/ / _ \/ __/ /_/ / _ \/ __ \`/ __ \/ _ \/ ___/  
- / /|  /  __/ /_/ _, _/  __/ /_/ / /_/ /  __/ /      
-/_/ |_|\___/\__/_/ |_|\___/\__,_/ .___/\___/_/       
-                                /_/   🐸 NETPEPEP
+    ____        __     ____                            
+   / __ \____ _/ /____/ __ \___  ____ _____  ___  _____
+  / /_/ / __ `/ __/ _  / /_/ / _ \/ __ `/ __ \/ _ \/ ___/
+ / ____/ /_/ / /_/  __/ _, _/  __/ /_/ / /_/ /  __/ /    
+/_/    \__,_/\__/\___/_/ |_|\___/\__,_/ .___/\___/_/     
+                                   /_/   ⚔️ NETREAPER
 
             ~ Lucifer's Chaotic Port Scanner ~
-=========================================================
 
-[*] Enter target(s) (comma-separated for multiple): 127.0.0.1
-[*] Enter number of ports to scan (e.g., 1000): 100
+[*] Target(s): 127.0.0.1
+[*] Ports to scan (e.g., 100): 100
 
-[~] Scanning IP: 127.0.0.1
+[~] Scanning 127.0.0.1 …
 [+] Port 22 is OPEN
 [-] Port 23 is CLOSED
 ...
@@ -50,12 +63,12 @@ Built for fun, quick scans, and learning basic network socket programming.
 
 ---
 
-## ⚙️ Requirements
+## ⚙️ **Requirements**
 
-- Python 3.6 or higher
-- `termcolor` package
+* Python **3.6+**
+* `termcolor` package
 
-Install it using pip:
+Install dependencies:
 
 ```bash
 pip install termcolor
@@ -63,43 +76,64 @@ pip install termcolor
 
 ---
 
-## 🚀 Usage
+## 🚀 **Usage**
 
-1. Clone the repository:
-
-```bash
-git clone https://github.com/your-username/netpepep.git
-cd netpepep
-```
-
-2. Run the script:
+1. **Clone the repo:**
 
 ```bash
-python netpepep.py
+git clone https://github.com/your-username/netreaper.git
+cd netreaper
 ```
 
-3. Follow the prompts to start scanning.
+2. **Run the scanner:**
+
+```bash
+python scanner.py
+```
+
+3. **Enter targets + port range**, and let the Reaper harvest results ⚔️
 
 ---
 
-## 🧩 To-Do / Future Features
+## 🧩 **Future Enhancements**
 
-- [ ] Multithreaded scanning for speed ⚡
-- [ ] Export results to a file 📁
-- [ ] Port-to-service detection (like Nmap) 🧠
-- [ ] Quiet mode (only show open ports)
-
----
-
-## ⚠️ Disclaimer
-
-> This tool is for **educational purposes only**.  
-> Use it only on systems you **own** or have **explicit permission** to scan.  
-> Unauthorized port scanning may be illegal.
+* [ ] Multithreaded scanning (huge performance boost ⚡)
+* [ ] Save results to file (JSON/TXT)
+* [ ] Port-to-service detection (Nmap style)
+* [ ] Quiet/stealth mode for scripts
+* [ ] Better exception handling
 
 ---
 
-## 🤝 Credits
+## ⚠️ **Disclaimer**
 
-Made with sockets, chaos, and caffeine by **Lucifer** 🐸  
-Star ⭐ the repo if you like it!
+> NetReaper is for **educational use only**.
+> Do **NOT** scan systems without permission.
+> Unauthorized scanning may be illegal.
+
+---
+
+## 👑 **Credits**
+
+Summoned with:
+☕ Caffeine
+🐍 Python sockets
+🌈 `termcolor`
+😈 Lucifer’s chaotic energy
+
+If you enjoy NetReaper, drop a ⭐ on GitHub — it pleases the Reaper ⚔️
+
+---
+
+If you'd like:
+
+* a **logo** for NetReaper
+* a **banner** for the GitHub repo
+* a **release version** README
+* a **Professional cybersecurity-style README** (serious tone)
+
+Just tell me:
+
+```
+make it professional
+```
