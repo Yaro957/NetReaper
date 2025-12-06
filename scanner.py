@@ -1,4 +1,4 @@
-# AI review test
+# final testing to check if runs smothly
 import socket
 from termcolor import colored
 
