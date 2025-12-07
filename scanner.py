@@ -1,4 +1,3 @@
-# final testing to check if runs smothly
 import socket
 from termcolor import colored
 
@@ -12,43 +11,42 @@ def print_banner():
                                 /_/   
     """
     print(colored(banner, 'cyan'))
-    print(colored("            ~ Lucifer's Port Scanner ~", 'magenta'))
-    print(colored("=========================================================", 'yellow'))
+    print(colored("              ~ Lucifer's Port Scanner ~", 'magenta'))
+    print(colored("=========================================================\n", 'yellow'))
 
-# 🛠️ Scans all ports up to `ports` on a given target
 def scan(target, ports):
+    print(colored(f"\n[*] Scanning {target}...", 'magenta'))
+    for port in range(1, ports + 1):
+        scan_port(target, port)
+
+def scan_port(ipaddress, port):
     try:
-        print(colored("\n[*] Scanning port for IP."+target, 'magenta'))
-        for port in range(1, ports + 1):
-            scan_port(target, port)
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+            sock.settimeout(0.4)
+            result = sock.connect_ex((ipaddress, port))
+            if result == 0:
+                print(colored(f"[+] Port {port:<5} OPEN", 'green'))
+            # Comment out next line to silence closed ports entirely  
+            # else:
+            #     print(colored(f"[-] Port {port:<5} CLOSED", 'red'))
+
     except KeyboardInterrupt:
         print(colored("\n[!] Scan interrupted by user.", 'red'))
         exit()
-
-# 🔍 Scans a single port and prints if open
-def scan_port(ipaddress, port):
-    try:
-        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        sock.settimeout(0.5)
-        sock.connect((ipaddress, port))
-        print(colored(f"[+] Port {port} is OPEN", 'green'))
-        sock.close()
-    except:
-        print(colored(f"[-] Port {port} is CLOSE", 'red'))
-        # pass
-
+    except Exception as e:
+        print(colored(f"[!] Error scanning port {port}: {e}", 'red'))
 
 print_banner()
+
 target = input(colored("[*] Enter target(s) (comma-separated for multiple): ", 'yellow')).strip()
 ports = int(input(colored("[*] Enter number of ports to scan (e.g., 1000): ", 'yellow')))
 
-# 🔁 Scan Logic
 if ',' in target:
-    print(colored("\n[*] Multiple targets detected. NetReaper goes wild...\n", 'magenta'))
-    for ip_addr in target.split(','):
-        scan(ip_addr.strip(), ports)
+    print(colored("\n[*] Multiple targets detected. Unleashing NetReaper...\n", 'magenta'))
+    for ip in target.split(','):
+        scan(ip.strip(), ports)
 else:
-    print(colored("\n[*] Single target detected. Unleashing NetReaper...\n", 'magenta'))
+    print(colored("\n[*] Single target detected. Releasing NetReaper...\n", 'magenta'))
     scan(target.strip(), ports)
 
-print(colored("\n[ ✔ ] Scan complete.", 'green'))
+print(colored("\n[ ✔ ] Scan completed successfully!", 'green'))
